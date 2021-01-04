@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import CounterButton from './CounterButton';
+
 
 const Header = () => {
-    return <h1 className='f1'>RoboFriends</h1>
+    const memoizedCounterButton = useMemo(() => <CounterButton />, [])
+    return (
+        <div>
+            <h1 className='f1'>RoboFriends</h1>
+            {memoizedCounterButton}
+        </div>
+    )
 };
 
 export default Header;
