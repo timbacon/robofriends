@@ -67,11 +67,11 @@ describe('requestRobots', () => {
     test('should handle REQUEST_ROBOTS_FAILED action', () => {
         expect(reducers.requestRobots(initialStateRobots, {
             type: REQUEST_ROBOTS_FAILED,
-            payload: 'NOOOO!!!!'
+            payload: 'Failed'
         })).toEqual({
             robots: [],
             isPending: false,
-            error: 'NOOOO!!!!'
+            error: 'Failed'
         });
     })
     
