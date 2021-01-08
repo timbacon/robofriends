@@ -7,6 +7,11 @@ import {
     REQUEST_ROBOTS_SUCCESS 
 } from "./constants";
 
+import configureMockStore from 'redux-mock-store';
+import thunkMiddleware from 'redux-thunk';
+
+const mockStore = configureMockStore([thunkMiddleware]);
+
 describe('setSearchField', () => {
     test('should create an action to seach robots', () => {
         const text = 'woo';
@@ -21,8 +26,32 @@ describe('setSearchField', () => {
 })
 
 describe('requestRobots', () => {
-    test('should request robots API', () => {
-        
+    test('should requesting robots API', () => {
+        const store = mockStore();
+        store.dispatch(actions.requestRobots());
+        const action = store.getActions();
+        const expectedAction = {
+            type: REQUEST_ROBOTS_PENDING
+        }
+        expect(action[0]).toEqual(expectedAction);
     })
+
+    // test('should requesting robots API - success', () => {
+    //     const store = mockStore();
+    //     const expectedAction = [{
+    //         type: REQUEST_ROBOTS_PENDING
+    //     }, 
+    //     {
+    //         type: REQUEST_ROBOTS_SUCCESS,
+    //         payload: [{
+    //             id: '123',
+    //             name: 'test',
+    //             email: 'test@test.com'
+    //         }]
+    //     }]
+    //     store.dispatch(actions.requestRobots()).then(() => {
+    //         expect(store.getActions()).toEqual(expectedAction);
+    //     });
+    // })
     
 })
