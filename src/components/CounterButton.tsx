@@ -1,13 +1,17 @@
 import React, {useState} from 'react';
 
-const CounterButton = ({color}) => {
+interface IProps {
+  color?: string
+}
+
+const CounterButton = ({color}: IProps) => {
   const [count, setCount] = useState(0)
 
   return (
     <button
         id='counter'
         color={color}
-        count={count}
+        // count={count}
         onClick={() => setCount(count => count + 1)}>
         Count: {count}
       </button>

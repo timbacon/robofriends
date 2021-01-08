@@ -1,12 +1,26 @@
 import React, { useEffect, useMemo } from 'react';
-import CardList from '../components/CardList'
-import SearchBox from '../components/SearchBox'
-import Scroll from '../components/Scroll'
-import ErrorBoundry from '../components/ErrorBoundry'
+import CardList from './CardList'
+import SearchBox from './SearchBox'
+import Scroll from './Scroll'
+import ErrorBoundry from './ErrorBoundry'
 import './MainPage.css'
-import Header from '../components/Header';
+import Header from './Header';
 
-const MainPage = ({ searchField, onSearchChange, onRequestRobots, robots, isPending }) => {
+export interface IRobot {
+  name: string, 
+  email: string, 
+  id: number
+}
+
+interface IProps {
+  searchField: string,
+  onSearchChange: any,
+  onRequestRobots: any,
+  robots: Array<IRobot>,
+  isPending: boolean
+}
+
+const MainPage = ({ searchField, onSearchChange, onRequestRobots, robots, isPending }: IProps) => {
   
   useEffect(() => {
     onRequestRobots();
@@ -14,7 +28,7 @@ const MainPage = ({ searchField, onSearchChange, onRequestRobots, robots, isPend
 
   const memoizedHeader = useMemo(() => <Header />, [])
   
-  const filteredRobots = robots => robots.filter(robot => {
+  const filteredRobots = (robots: Array<IRobot>) => robots.filter((robot: IRobot) => {
     return robot.name.toLowerCase().includes(searchField.toLowerCase());
   })
   if (isPending){
